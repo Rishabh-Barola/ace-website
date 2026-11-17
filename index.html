@@ -50,11 +50,23 @@ a{color:inherit}
 .btn::before{content:'[ ';color:var(--ca)}
 .btn::after{content:' ]';color:var(--ca)}
 .btn:hover{color:var(--ca)}
-.rail{position:absolute;right:30px;top:50%;transform:translateY(-50%);height:42vh;width:1px;background:rgba(255,255,255,.1)}
-.rail i{position:absolute;left:-4px;width:9px;height:1px;background:rgba(255,255,255,.35);transition:background .3s}
+.rail{position:absolute;right:16px;top:50%;transform:translateY(-50%);height:56vh;width:30px;pointer-events:auto;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+.rail.drag{cursor:grabbing}
+.rail::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.14);transition:background .3s}
+.rail.drag::before{background:rgba(255,255,255,.28)}
+.rail .bd{position:absolute;right:-16px;top:-10vh;bottom:-10vh;width:260px;background:linear-gradient(to left,rgba(4,6,11,.92) 30%,rgba(4,6,11,0));opacity:0;transition:opacity .3s;pointer-events:none}
+.rail.drag .bd{opacity:1}
+.rail i{position:absolute;left:calc(50% - 4px);width:9px;height:1px;background:rgba(255,255,255,.35);transition:background .3s}
 .rail i.on{background:var(--acc)}
-.rail b{position:absolute;left:-1px;top:0;width:3px;height:0;background:var(--acc);box-shadow:0 0 10px var(--acc)}
-.rail em{position:absolute;right:14px;font-style:normal;font-size:9.5px;letter-spacing:.14em;color:var(--dim);transform:translateY(-50%);white-space:nowrap}
+.rail i span{position:absolute;right:22px;top:50%;transform:translateY(-50%);font-style:normal;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap;opacity:0;transition:opacity .25s,color .25s;pointer-events:none}
+.rail i.on span{color:var(--fg)}
+.rail.drag i span{opacity:1}
+.rail b{position:absolute;left:calc(50% - 1px);top:0;width:3px;height:0;background:var(--acc);box-shadow:0 0 10px var(--acc);pointer-events:none}
+.rail .th{position:absolute;left:50%;top:0;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--bg);border:1px solid var(--acc);box-shadow:0 0 12px var(--acc);pointer-events:none;transition:width .2s,height .2s,margin .2s}
+.rail.drag .th{width:17px;height:17px;margin:-8.5px 0 0 -8.5px;background:var(--acc)}
+.rail em{position:absolute;right:22px;font-style:normal;font-size:9.5px;letter-spacing:.14em;color:var(--dim);transform:translateY(-50%);white-space:nowrap;pointer-events:none;transition:opacity .25s}
+.rail.drag em{opacity:0}
+@media (hover:hover){.rail:hover::before{background:rgba(255,255,255,.28)}.rail:hover .bd,.rail:hover i span{opacity:1}.rail:hover em{opacity:0}}
 .bl,.br{position:absolute;bottom:20px;font-size:9.5px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;line-height:1.7}
 .bl{left:28px}
 .br{right:28px;text-align:right}
@@ -148,18 +160,18 @@ h2{font-size:clamp(30px,3.6vw,54px);line-height:1}
 #p-final .rt h4{font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;margin:0 0 6px}
 #p-final .rt .blk{margin-bottom:22px}
 #p-final .rt .plat{font-family:var(--disp);font-size:24px;color:var(--fg);letter-spacing:-.01em}
-.sel{margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-.sel .k{font-size:9.5px;color:var(--dim);margin-bottom:12px}
-.sel .row{display:flex;align-items:center;gap:14px}
-.sel .arr{font:inherit;background:none;border:1px solid rgba(255,255,255,.18);color:var(--fg);width:34px;height:34px;cursor:pointer;font-size:14px;transition:border-color .2s,color .2s}
-.sel .arr:hover{border-color:var(--acc);color:var(--acc)}
-.sel .lab{min-width:150px;font-size:13px;text-align:center}
-.sel .lab::before{content:'[ ';color:var(--acc)}
-.sel .lab::after{content:' ]';color:var(--acc)}
-.sel .handle{margin-top:12px;color:var(--dim);font-size:10px;text-transform:none;letter-spacing:.08em}
-.sel .dots{display:flex;gap:6px;margin-top:12px}
-.sel .dots i{width:14px;height:1px;background:rgba(255,255,255,.2)}
-.sel .dots i.on{background:var(--acc)}
+#p-final .sel{margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+#p-final .sel .k{font-size:9.5px;color:var(--dim);margin-bottom:12px}
+#p-final .sel .row{display:flex;align-items:center;gap:14px}
+#p-final .sel .arr{font:inherit;background:none;border:1px solid rgba(255,255,255,.18);color:var(--fg);width:34px;height:34px;cursor:pointer;font-size:14px;transition:border-color .2s,color .2s}
+#p-final .sel .arr:hover{border-color:var(--acc);color:var(--acc)}
+#p-final .sel .lab{min-width:150px;font-size:13px;text-align:center}
+#p-final .sel .lab::before{content:'[ ';color:var(--acc)}
+#p-final .sel .lab::after{content:' ]';color:var(--acc)}
+#p-final .sel .handle{margin-top:12px;color:var(--dim);font-size:10px;text-transform:none;letter-spacing:.08em}
+#p-final .sel .dots{display:flex;gap:6px;margin-top:12px}
+#p-final .sel .dots i{width:14px;height:1px;background:rgba(255,255,255,.2)}
+#p-final .sel .dots i.on{background:var(--acc)}
 .foot{position:absolute;left:6vw;bottom:20px;font-size:9.5px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
 
 #dossier{position:fixed;inset:0;z-index:5;background:radial-gradient(ellipse at 50% 40%,rgba(8,12,20,.78),rgba(2,3,6,.96));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(.2,.7,.2,1),visibility .7s}
@@ -234,15 +246,113 @@ h2{font-size:clamp(30px,3.6vw,54px);line-height:1}
   #p-final .lt{top:14vh;left:6vw;right:6vw;width:auto}
   #p-final .rt{display:none}
   #p-final .lede{display:none}
-  .sel{margin-top:16px;padding-top:12px}
+  #p-final .sel{margin-top:16px;padding-top:12px}
   .tag.ex{width:min(320px,86vw)}
   .tag.ex h3{font-size:30px}
   .card{width:min(320px,86vw)}
   .card h3{font-size:32px}
-  .rail,.bl,.br{display:none}
+  .bl,.br{display:none}
   #p-hero{bottom:10vh;left:6vw;right:6vw}
 }
 @media (prefers-reduced-motion:reduce){.hint i{animation:none}}
+/* ===== phone layout (body.mob is set by the engine whenever MOBILE is true) ===== */
+.roster{display:none}
+#p-stats .pillars{display:block;margin-top:20px} /* the classic .pillars grid must not leak into the tour */
+body.mob .top{padding:14px 16px 30px;align-items:center;background:linear-gradient(rgba(4,6,11,.92) 45%,rgba(4,6,11,0))}
+body.mob .brand .t{display:none}
+body.mob .brand img.mark{height:28px}
+body.mob .right{gap:18px}
+body.mob .btn{font-size:11px;padding:9px 0}
+body.mob #snd{display:none}
+body.mob .jump{position:fixed;left:16px;right:16px;top:62px;width:auto;max-height:calc(100vh - 90px);overflow:auto;grid-template-columns:1fr 1fr;padding:16px;gap:12px 16px}
+body.mob #ui::before{content:'';position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(rgba(4,6,11,0),rgba(4,6,11,.78) 45%,rgba(4,6,11,.92));pointer-events:none}
+body.mob .bigword{display:none}
+body.mob .rail{right:4px;width:26px;height:58vh;top:52%}
+body.mob .rail em{display:none}
+body.mob .rail i span{font-size:10.5px;right:20px}
+body.mob .rail .bd{width:78vw}
+body.mob .kicker{font-size:10.5px;margin-bottom:10px}
+body.mob h2{font-size:30px;line-height:1.05}
+body.mob .lede{font-size:13.5px;line-height:1.6;color:#c3cad6;max-width:none}
+body.mob #p-hero{left:22px;right:22px;bottom:28px}
+body.mob #p-hero h1{font-size:52px}
+body.mob #p-hero .lede{margin-top:16px}
+body.mob #p-hero .hint{margin-top:18px}
+/* stats: numbers dock as a row at the top, story at the bottom */
+body.mob #p-stats{left:22px;right:22px;top:auto;bottom:22px;width:auto}
+body.mob #p-stats h2{font-size:26px}
+body.mob #p-stats .pillars{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin-top:12px;font-size:12.5px;line-height:1.45;color:#b9c1ce}
+body.mob #p-stats .pillars li{display:block;padding:10px 0}
+body.mob #p-stats .pillars li span.n{display:none}
+body.mob #p-stats .pillars li b{font-size:10.5px;margin-bottom:3px}
+body.mob .tag.stat{display:flex;flex-direction:column-reverse;white-space:normal;width:calc((100vw - 44px) / 3);padding-right:8px;font-size:9.5px;line-height:1.35;letter-spacing:.1em}
+body.mob .tag.stat .n{display:none}
+body.mob .tag.stat .big{font-size:30px;margin:0 0 4px}
+/* exhibits */
+body.mob .tag.ex{width:calc(100vw - 44px)}
+body.mob .tag.ex h3{font-size:32px;margin:4px 0 8px}
+body.mob .tag.ex .meta{font-size:10px;line-height:1.6}
+body.mob .tag.ex p{font-size:13.5px;line-height:1.6;color:#c3cad6;margin-bottom:10px}
+body.mob .tag.ex .how{font-size:10px}
+body.mob .tag.factbox{width:calc(100vw - 44px);text-align:left}
+body.mob .tag.factbox .big{font-size:26px;margin:2px 0 2px}
+body.mob .tag.factbox p{font-size:12.5px}
+/* board: the discs are too small to label on a phone, so list the people under them */
+body.mob #p-board{left:22px;right:22px;top:auto;bottom:22px;width:auto}
+body.mob #p-board h2{font-size:28px}
+body.mob .roster{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;list-style:none;margin:12px 0 0;padding:0}
+.roster li{border-top:1px solid rgba(255,255,255,.08)}
+.roster button{font:inherit;background:none;border:0;color:var(--fg);text-align:left;padding:8px 0 7px;width:100%;cursor:pointer;display:block}
+.roster b{display:block;font:500 14px var(--disp);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.roster span{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.roster button.on b{color:var(--acc)}
+.roster button.on span{color:var(--fg)}
+/* committee hub: buttons as a 2×3 grid under the ring */
+body.mob #p-hub{top:76px;left:22px;right:22px;width:auto}
+body.mob #p-hub h2{font-size:26px}
+body.mob #p-hub .lede{font-size:12.5px}
+body.mob .tag.hb button{width:calc((100vw - 54px) / 2);height:48px;padding:0 12px;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-content:center;text-align:left;font-size:11px;letter-spacing:.1em}
+body.mob .tag.hb button i{grid-row:span 2}
+body.mob .tag.hb button em{grid-column:2;font-size:9px;margin-top:2px}
+body.mob .tag.hb .go{display:none}
+body.mob .tag.hb.hov button{transform:translate(-50%,-50%)}
+/* committee member cards */
+body.mob .card{width:calc(100vw - 44px)}
+body.mob .card h3{font-size:34px}
+body.mob .card dl{font-size:13px;grid-template-columns:70px 1fr}
+body.mob .card dt{font-size:10px}
+body.mob .card dd a{word-break:break-all}
+body.mob .card .head{gap:14px}
+body.mob .card .head .ph{width:76px;height:76px}
+/* hiring */
+body.mob #p-hiring{top:72px;left:22px;right:22px;width:auto}
+body.mob #p-hiring h2{font-size:28px}
+body.mob #p-hiring .status{margin:12px 0 4px}
+body.mob #p-hiring .lede{font-size:13px;margin-top:12px}
+body.mob #hBtns{margin-top:8px!important;gap:4px 18px!important}
+body.mob .clist{margin-top:10px}
+body.mob .clist li button{font-size:11.5px;padding:7px 0}
+body.mob .clist li span{font-size:10px}
+body.mob .applyb{width:132px;height:132px}
+body.mob .applyb .core{inset:28px;gap:2px}
+body.mob .applyb .core svg{width:22px;height:22px}
+body.mob .applyb .core b{font-size:13px}
+body.mob .applyb .tip{display:none}
+/* finale: title on top, controls at the bottom, the particle cloud in between */
+body.mob #p-final .lt{top:72px;bottom:20px;left:22px;right:22px;width:auto;display:flex;flex-direction:column}
+body.mob #p-final h2{font-size:28px}
+body.mob #p-final .acts{margin-top:auto!important;flex-direction:row!important;flex-wrap:wrap;gap:0 18px!important}
+body.mob #p-final .sel{margin-top:8px;padding-top:10px}
+body.mob #p-final .sel .k{margin-bottom:8px}
+body.mob #p-final .sel .row{gap:10px}
+body.mob #p-final .sel .arr{width:40px;height:40px}
+body.mob #p-final .sel .lab{min-width:0;flex:1;font-size:12px}
+body.mob #p-final .sel .handle{margin-top:6px;font-size:11px}
+body.mob #p-final .sel .dots{margin-top:6px}
+body.mob .offi{margin-top:12px;padding-top:12px}
+body.mob #p-final .foot{display:none}
+body.mob #dossier .col h2{font-size:38px}
+body.mob #dossier .col{font-size:13.5px;padding-top:14vh}
 /* ===== mode switching ===== */
 body:not(.imm) #gl,body:not(.imm) #hud,body:not(.imm) #ui,body:not(.imm) #scroller,body:not(.imm) #enter,body:not(.imm) #dossier,body:not(.imm) #loader{display:none!important}
 body.imm #classic,body.imm .clh,body.imm .toast{display:none!important}
@@ -335,7 +445,7 @@ body.imm #classic,body.imm .clh,body.imm .toast{display:none!important}
 .mcard:hover .ph{border-color:#7fe0b8}
 .mcard b{font-weight:500;font-size:16px;color:var(--fg)}
 .mcard span{font:400 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.5}
-.mcard a{font:400 10px var(--mono);letter-spacing:.04em;color:#9fb0ff;text-decoration:none;word-break:break-all}
+.mcard a{font:400 10px var(--mono);letter-spacing:.04em;color:#9fb0ff;text-decoration:none;overflow-wrap:anywhere}
 .tabs{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 30px}
 .tabs button{font:500 14px var(--disp);color:#c3cad6;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:all .25s}
 .tabs button i{width:8px;height:8px;border-radius:50%}
@@ -557,7 +667,7 @@ body.imm #gl{touch-action:none}
   </div>
 
   <button class="chip" id="inchip"><i></i><span id="inTxt"></span><b>All committees ↺</b></button>
-  <div class="rail" id="rail"><b></b></div>
+  <div class="rail" id="rail" role="slider" aria-label="Tour position" aria-valuemin="0" aria-valuemax="100" tabindex="0"><div class="bd"></div><b></b><div class="th"></div></div>
   <div class="bl" id="coords">CAM <b>0.00 0.00 0.00</b><br>RUN <b>0.000</b></div>
   <div class="br">Scroll / drag to travel<br><b>Move the cursor to play</b></div>
 
@@ -583,6 +693,7 @@ body.imm #gl{touch-action:none}
     <div class="kicker" data-scramble>03 / People</div>
     <h2>The board.</h2>
     <p class="lede">The ten students who steer ACE. Hover a portrait to bring it to life, click to spin it — then keep scrolling to step into a committee.</p>
+    <ul class="roster" id="roster"></ul>
   </section>
 
   <section class="panel sh" id="p-hub" data-stop="hub">
@@ -605,7 +716,7 @@ body.imm #gl{touch-action:none}
       <div class="kicker" data-scramble>04 / Connect</div>
       <h2>Learn.<br>Connect.<br>Execute.</h2>
       <p class="lede">Stir the cloud with your cursor. Pick a channel and the same particles reassemble into it.</p>
-      <div style="margin-top:22px;display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+      <div class="acts" style="margin-top:22px;display:flex;flex-direction:column;gap:4px;align-items:flex-start">
         <a class="btn" href="https://www.analytics-club.org/join" target="_blank" rel="noopener">Become a member ↗</a>
         <button class="btn" id="restart">Back to the start ↺</button>
       </div>
@@ -742,7 +853,7 @@ document.querySelectorAll('[data-chips]').forEach(box => { box.innerHTML = OFFIC
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const hx = c => '#' + c.map(v => Math.round(Math.min(1, Math.max(0, v)) * 255).toString(16).padStart(2, '0')).join('');
   const keyOf = c => c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  const mcard = (m, sub) => `<div class="mcard">${photoHTML(m)}<b>${esc(m.name || 'Demo Member')}</b><span>${sub}</span>${m.email ? `<a href="mailto:${esc(m.email)}">${esc(m.email)}</a>` : ''}${m.linkedin ? `<a href="${esc(m.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}</div>`;
+  const mcard = (m, sub) => `<div class="mcard">${photoHTML(m)}<b>${esc(m.name || 'Demo Member')}</b><span>${sub}</span>${m.email ? `<a href="mailto:${esc(m.email)}">${esc(m.email).replace('@', '<wbr>@')}</a>` : ''}${m.linkedin ? `<a href="${esc(m.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}</div>`;
   // board
   document.getElementById('clBoard').innerHTML = BOARD.map(b => mcard(b, esc(b.role))).join('');
   // committees
@@ -1143,7 +1254,7 @@ const ZB = -104, ZHUB = -124, CM_SP = 14, RISER = 1.32;
 const zMember = k => ZHUB - 14 - CM_SP * k;
 let CUR = 0;
 let KF = [], SEG = [], STOP = {}, TOTAL = 0, PATH = { n: 3, zH: 0, zF: 0, rings: [] };
-let MOBILE = false;
+let MOBILE = false; const TOUCH = matchMedia('(hover: none)').matches;
 function buildPath(n) {
   const zH = ZHUB - 14 - CM_SP * n, zF = zH - 34;
   const K = [
@@ -1162,7 +1273,7 @@ function buildPath(n) {
   for (let k = 0; k < n; k++) { const z = zMember(k); K.push({ p: [0, 2.15, z + 6.4], l: [0, 1.85, z], pm: [0, 2.6, z + 7.6], lm: [0, .95, z], stop: 'cm' + k, hold: .75 }); }
   K.push({ p: [-2.3, 2.5, zH + 8.4], l: [-1.7, 2.3, zH], pm: [0, 2.4, zH + 9], lm: [0, 5.6, zH], stop: 'hiring', hold: .95 });
   K.push({ p: [0, 3.0, zF + 21], l: [0, 2.9, zF + 2] });
-  K.push({ p: [0, 3.35, zF + 10.5], l: [0, 2.95, zF], pm: [0, 2.4, zF + 13], lm: [0, 5.0, zF], stop: 'final', hold: 1.1 });
+  K.push({ p: [0, 3.35, zF + 10.5], l: [0, 2.95, zF], pm: [0, 2.4, zF + 10], lm: [0, 1.67, zF], stop: 'final', hold: 1.1 });
   KF = K; SEG = []; STOP = {}; let acc = 0;
   const st = KF.map((k, i) => k.stop ? i : -1).filter(i => i >= 0);
   st.forEach((ki, j) => { const k = KF[ki]; STOP[k.stop] = { a: acc, b: acc + k.hold, ki }; SEG.push({ hold: true, a: acc, b: acc + k.hold, u0: ki, u1: ki }); acc += k.hold;
@@ -1605,7 +1716,7 @@ function freeAll() { if (!RT) return; const del = r => { if (!r) return; if (r.t
   del(RT.scene); del(RT.ms); RT.mips.forEach(del); }
 const hud = $('#hud'), ctx = hud.getContext('2d');
 function resize() {
-  MOBILE = innerWidth / innerHeight < .8 || innerWidth < 600;
+  MOBILE = innerWidth / innerHeight < .8 || innerWidth < 600; document.body.classList.toggle('mob', MOBILE);
   DPR = Math.min(devicePixelRatio || 1, 2); const w = innerWidth, h = innerHeight;
   if (w * h * DPR * DPR > 4.2e6) DPR = Math.sqrt(4.2e6 / (w * h));
   CW = Math.max(1, Math.round(w * DPR)); CH = Math.max(1, Math.round(h * DPR));
@@ -1651,9 +1762,24 @@ $('#brand').addEventListener('click', () => goStop('hero'));
 $('#restart').addEventListener('click', () => goStop('hero'));
 
 /* rail */
-const rail = $('#rail'); const railLab = document.createElement('em'); rail.appendChild(railLab);
+const rail = $('#rail'); const railTh = rail.querySelector('.th'); const railLab = document.createElement('em'); rail.appendChild(railLab);
 const railLabel = k => ({ hero: '00', stats: '01', ex0: '02.1', ex1: '02.2', ex2: '02.3', board: '03', hub: '03.H', hiring: '03.J', final: '04' }[k] || ('03.' + (+k.slice(2) + 1)));
-function buildRail() { rail.querySelectorAll('i').forEach(i => i.remove()); Object.keys(STOP).forEach(n => { const i = document.createElement('i'); i.style.top = ((STOP[n].a + STOP[n].b) / 2 / TOTAL * 100) + '%'; i.dataset.s = n; rail.appendChild(i); }); }
+const railName = k => { if (k.startsWith('cm')) { const C = COMMITTEES[CUR], m = C.members[+k.slice(2)]; const nm = m ? asMember(m).name : ''; return C.name + ' · ' + (nm || 'Member ' + (+k.slice(2) + 1)); }
+  return { hero: 'Intro', stats: 'Numbers', ex0: 'Datathon', ex1: 'Hack4Good', ex2: 'Quant Society', board: 'The board', hub: 'Committees', hiring: 'Join ' + COMMITTEES[CUR].name, final: 'Connect' }[k] || k; };
+function buildRail() { rail.querySelectorAll('i').forEach(i => i.remove()); Object.keys(STOP).forEach(n => { const i = document.createElement('i'); i.style.top = (stopCenter(n) / TOTAL * 100) + '%'; i.dataset.s = n;
+  const sp = document.createElement('span'); sp.textContent = railName(n); i.appendChild(sp); rail.appendChild(i); }); }
+/* rail = scrubber: drag to fly through the world (settles on the nearest stop), tap to jump */
+let railDrag = null;
+const railS = y => { const r = rail.getBoundingClientRect(); return clamp((y - r.top) / r.height, 0, 1) * TOTAL; };
+const nearestStop = s => stopOrder().reduce((a, n) => Math.abs(stopCenter(n) - s) < Math.abs(stopCenter(a) - s) ? n : a, 'hero');
+rail.addEventListener('pointerdown', e => { if (!active || dossierOpen) return; e.preventDefault(); e.stopPropagation(); try { rail.setPointerCapture(e.pointerId); } catch (_) {}
+  railDrag = { y0: e.clientY, moved: false }; rail.classList.add('drag'); closeJump(); });
+rail.addEventListener('pointermove', e => { if (!railDrag) return; if (!railDrag.moved && Math.abs(e.clientY - railDrag.y0) < 5) return; railDrag.moved = true;
+  const s = railS(e.clientY); lastDir = Math.sign(s - sTarget) || lastDir; tween = null; lastUserScroll = 0; sTarget = s; syncScroll(sTarget); });
+const railEnd = e => { if (!railDrag) return; const moved = railDrag.moved; railDrag = null; rail.classList.remove('drag'); const n = nearestStop(railS(e.clientY));
+  if (moved) tweenTo(stopCenter(n), 650); else goStop(n); };
+rail.addEventListener('pointerup', railEnd); rail.addEventListener('pointercancel', railEnd);
+rail.addEventListener('keydown', e => { if (['ArrowDown', 'ArrowRight'].includes(e.key)) { e.preventDefault(); e.stopPropagation(); step(1); } else if (['ArrowUp', 'ArrowLeft'].includes(e.key)) { e.preventDefault(); e.stopPropagation(); step(-1); } });
 
 const GLY = '!<>-_\\/[]{}=+*^?#01ABCDEF';
 function scramble(el, dur = 700) { const txt = el.dataset.txt || (el.dataset.txt = el.textContent); const t0 = performance.now();
@@ -1719,12 +1845,12 @@ $('#snd').addEventListener('click', () => { try { if (!AC) initAudio(); soundOn 
 /* committees: choose / switch */
 function setCommittee(i) {
   CUR = i; const C = COMMITTEES[i]; const n = C.members.length;
-  if (n !== PATH.n) { const keep = sTarget; buildPath(n); setScrollHeight(); buildRail(); scrollToS(keep, false); buildLights(); if (W.sculpt) W.sculpt.c[2] = PATH.zF; }
+  if (n !== PATH.n) { const keep = sTarget; buildPath(n); setScrollHeight(); buildRail(); scrollToS(keep, false); buildLights(); if (W.sculpt) W.sculpt.c[2] = PATH.zF; } else buildRail();
   W.cmRigs.forEach((D, k) => { const m = C.members[k] ? asMember(C.members[k]) : {}; setDisc(D, m, C.accent); D.c = [0, 1.95, zMember(k)]; D.wave = 0; });
   cmCards.forEach((cd, k) => { const raw = C.members[k]; cd.on = !!raw; if (!raw) return; const m = asMember(raw);
     cd.el.style.setProperty('--ca', hex(C.accent));
     cd.el.innerHTML = `<div class="head"><div><div class="id">${esc(C.name)} committee // 0${k + 1} of 0${n}</div><h3>${esc(m.name || 'Demo Member')}</h3></div></div>
-      <dl><dt>Role</dt><dd>${esc(m.role)}</dd><dt>Focus</dt><dd>${esc(m.focus || '')}</dd>${m.email ? `<dt>Email</dt><dd><a href="mailto:${esc(m.email)}" style="color:inherit">${esc(m.email)}</a></dd>` : ''}</dl>
+      <dl><dt>Role</dt><dd>${esc(m.role)}</dd><dt>Focus</dt><dd>${esc(m.focus || '')}</dd>${m.email ? `<dt>Email</dt><dd><a href="mailto:${esc(m.email)}" style="color:inherit">${esc(m.email).replace('@', '<wbr>@')}</a></dd>` : ''}</dl>
       <div class="row" style="margin-top:14px"><button class="btn" data-wave>Spin</button>${m.linkedin ? `<a class="btn" href="${esc(m.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}<button class="btn" data-hub>All committees</button></div>${m.name ? '' : '<div class="proto">Placeholder · add name &amp; photo in MEMBERS</div>'}`;
     cd.el.querySelector('[data-wave]').addEventListener('click', () => { W.cmRigs[k].wave = SPIN; blip(600, .1); });
     cd.el.querySelector('[data-hub]').addEventListener('click', () => goHub()); });
@@ -1922,8 +2048,8 @@ function frame(now) {
   const lookP = pOK ? rayPlane(cp, rd, [0, 2, cp[2] - 7], [0, 0, 1]) : null;
   if (boardOn) {
     let best = 1e8, bestR = null, bestT = 0; if (pOK && SW.board > .3) W.boardRigs.forEach(D => { const h = discHit(D, cp, rd); if (h.d < 1e8 && h.t < best) { best = h.t; bestR = D; } });
-    hoverRig = bestR; const hp = bestR ? v3.add(cp, v3.mul(rd, best)) : null;
-    W.boardRigs.forEach(D => { D.hov = damp(D.hov, D === bestR ? 1 : 0, 9, dt); animDisc(D, dt, D === bestR ? hp : null); });
+    hoverRig = bestR; const hp = bestR ? v3.add(cp, v3.mul(rd, best)) : null; const picked = !bestR && W.boardPick >= 0 ? W.boardRigs[W.boardPick] : null;
+    W.boardRigs.forEach(D => { D.hov = damp(D.hov, D === bestR || D === picked ? 1 : 0, 9, dt); animDisc(D, dt, D === bestR ? hp : null); });
     if (bestR) { cursorHand = true; HOV = () => { if (bestR.wave <= 0) { bestR.wave = SPIN; blip(600, .1); } }; }
   }
   /* ---- hub ---- */
@@ -2122,7 +2248,7 @@ function drawHUD(SW, cmDiss) {
   const cur = Object.keys(STOP).reduce((a, k) => dS(k) < dS(a) ? k : a, 'hero'); CURSTOP = cur;
   const navKey = k => k.startsWith('ex') ? 'ex0' : (k === 'board' || k === 'hub' || k === 'hiring' || k.startsWith('cm')) ? 'board' : k;
   navBtns.forEach(b => b.classList.toggle('on', b.dataset.go === navKey(cur)));
-  const prog = sSmooth / TOTAL; rail.querySelector('b').style.height = (prog * 100) + '%';
+  const prog = clamp(sSmooth / TOTAL, 0, 1); rail.querySelector('b').style.height = (prog * 100) + '%'; railTh.style.top = (prog * 100) + '%'; rail.setAttribute('aria-valuenow', Math.round(prog * 100)); rail.setAttribute('aria-valuetext', railName(cur));
   rail.querySelectorAll('i').forEach(i => i.classList.toggle('on', i.dataset.s === cur));
   railLab.style.top = (prog * 100) + '%'; railLab.textContent = railLabel(cur) + ' — ' + (prog * 100).toFixed(1).padStart(4, '0');
   $('#coords').innerHTML = `CAM <b>${CAM.p.map(v => v.toFixed(2)).join(' ')}</b><br>RUN <b>${prog.toFixed(3)}</b> · VEL <b>${sVel.toFixed(2)}</b>`;
@@ -2139,14 +2265,14 @@ function drawHUD(SW, cmDiss) {
       lab(`BLK_${String(i).padStart(3, '0')}  Δ${(W.blocks[i].off ? v3.len(W.blocks[i].off) : Math.hypot(W.blocks[i].ox, W.blocks[i].oy, W.blocks[i].oz)).toFixed(2)}  ${(20 + inf * 46).toFixed(1)}°`, lx + 20, ly, .85 * SW.hero, ACCs); });
     const c = project(HERO.c); if (c.ok) { ctx.strokeStyle = WHs + (.18 * SW.hero) + ')'; const r = Math.abs(project([HERO.c[0] + HERO.R * 1.25, HERO.c[1], HERO.c[2]]).x - c.x);
       ctx.beginPath(); ctx.arc(c.x, c.y, r, -.6 + T * .2, 1.2 + T * .2); ctx.stroke(); ctx.beginPath(); ctx.arc(c.x, c.y, r * 1.06, 2.4 - T * .15, 3.6 - T * .15); ctx.stroke();
-      lab('CORE · LUM ' + (1 + (W.heroLeak || 0) * 9).toFixed(2), c.x + r + 10, c.y, .4 * SW.hero); } }
+      if (!MOBILE) lab('CORE · LUM ' + (1 + (W.heroLeak || 0) * 9).toFixed(2), c.x + r + 10, c.y, .4 * SW.hero); } }
 
-  if (SW.stats > .01 && W.statsP) { const q = project([W.statsP[0], 0, W.statsP[2]]); if (q.ok) { ctx.strokeStyle = ACCs + (.5 * SW.stats) + ')'; ctx.beginPath(); ctx.ellipse(q.x, q.y, 34, 12, 0, 0, Math.PI * 2); ctx.stroke(); lab('LIFT · CLICK FOR A RIPPLE', q.x + 40, q.y, .45 * SW.stats, ACCs); } }
+  if (SW.stats > .01 && W.statsP) { const q = project([W.statsP[0], 0, W.statsP[2]]); if (q.ok) { ctx.strokeStyle = ACCs + (.5 * SW.stats) + ')'; ctx.beginPath(); ctx.ellipse(q.x, q.y, 34, 12, 0, 0, Math.PI * 2); ctx.stroke(); if (!MOBILE) lab('LIFT · CLICK FOR A RIPPLE', q.x + 40, q.y, .45 * SW.stats, ACCs); } }
 
   for (const t of tags) { const w = t.weight ? t.weight(SW) : (SW[t.stop] || 0); if (w <= .01 || (t.on === false)) { placeTag(t.el, -999, -999, 0); continue; }
     const a = t.anchor(); const q = project(a); if (!q.ok) { placeTag(t.el, -999, -999, 0); continue; }
     const off = t.off ? t.off(q) : [0, 0]; let x = q.x + off[0], y = q.y + off[1];
-    const docked = MOBILE && t.dock; if (docked) { const d = typeof t.dock === 'function' ? t.dock() : [22, innerHeight * .6]; x = d[0]; y = d[1]; } else if (MOBILE) x = Math.min(x, innerWidth - (t.el.offsetWidth || 120) - 8);
+    const docked = MOBILE && t.dock; if (docked) { const d = typeof t.dock === 'function' ? t.dock() : [22, innerHeight - (t.el.offsetHeight || 220) - 22]; x = d[0]; y = d[1]; } else if (MOBILE) x = Math.min(x, innerWidth - (t.el.offsetWidth || 120) - 8);
     const al = (t.alpha ? t.alpha(q) : 1); if (t.R) t.el.classList.toggle('hov', t.R.hov > .5); if (t.cmk != null) t.el.classList.toggle('hot', W.cmRigs[t.cmk].hov > .5); if (t.fi != null) t.el.classList.toggle('on', t.fi === W.factOn); if (t.fbox && t.shown !== W.factOn) { t.shown = W.factOn; const f = DFACTS[W.factOn]; t.el.innerHTML = `<span class="n">0${W.factOn + 1} / 04 · Datathon in numbers</span><span class="big">${f.k}</span><p>${f.d}</p>`; } if (MOBILE && t.hideMobile) { placeTag(t.el, -999, -999, 0); continue; }
     placeTag(t.el, x, y, easeSine(w) * al); t.el.classList.toggle('live', w > .6 && al > .3);
     if (t.from && !docked) { const f = project(t.from()); if (f.ok) { ctx.strokeStyle = (t.lc || ACCs) + (.6 * w * al) + ')'; cross(f.x, f.y, 4); const tw = t.el.offsetWidth || 0; const ex = f.x > x + tw * .5 ? x + tw + 6 : x - 6; ctx.beginPath(); ctx.moveTo(f.x, f.y); ctx.lineTo(ex, y + (t.lineY || 6)); ctx.stroke(); } } }
@@ -2154,7 +2280,7 @@ function drawHUD(SW, cmDiss) {
   EX.forEach((e, i) => { const w = SW['ex' + i]; if (w < .01) return; const p = e.pos; const b = bbox([[p[0] - 1.3, .62, p[2] - 1.3], [p[0] + 1.3, 3.75, p[2] + 1.3], [p[0] - 1.3, 3.75, p[2] + 1.3], [p[0] + 1.3, .62, p[2] - 1.3]]);
     if (!b.ok) return; ctx.strokeStyle = WHs + (.45 * w) + ')'; brackets(b.x0 - 10, b.y0 - 10, b.x1 + 10, b.y1 + 10, 12);
     const info = i === 0 ? 'SPECIMEN 01 · HOVER THE MARKERS' : i === 1 ? 'SPECIMEN 02 · DRAG TO SPIN' : 'SPECIMEN 03 · HOVER A CANDLE';
-    lab(info, b.x0 - 10, b.y1 + 22, .5 * w); });
+    if (!MOBILE) lab(info, b.x0 - 10, b.y1 + 22, .5 * w); });
   if (SW.ex0 > .01 && W.knot) { const K = W.knot; W.knotHot.forEach((h, i) => { const q = project(v3.add(K.c, rotY(h, K.rot))); if (!q.ok) return; const on = i === W.factOn;
     const pulse = .5 + .5 * Math.sin(T * 3 + i); ctx.strokeStyle = (on ? 'rgba(255,212,154,' : ACCs) + ((on ? .95 : .55) * SW.ex0) + ')';
     ctx.beginPath(); ctx.arc(q.x, q.y, on ? 10 : 6 + pulse * 2, 0, Math.PI * 2); ctx.stroke(); cross(q.x, q.y, on ? 3 : 2); }); }
@@ -2166,7 +2292,7 @@ function drawHUD(SW, cmDiss) {
     const a = w * (1 - dsv); ctx.strokeStyle = rgba(C.accent, .55 * a); brackets(b.x0, b.y0, b.x1, b.y1, 14);
     const sy = b.y0 + (b.y1 - b.y0) * ((T * .3) % 1); ctx.beginPath(); ctx.moveTo(b.x0 + 4, sy); ctx.lineTo(b.x1 - 4, sy); ctx.stroke();
     for (let j = 0; j <= 10; j++) { const yy = b.y0 + (b.y1 - b.y0) * j / 10; ctx.beginPath(); ctx.moveTo(b.x0 - 8, yy); ctx.lineTo(b.x0 - (j % 5 ? 4 : 12), yy); ctx.stroke(); }
-    ctx.fillStyle = rgba(C.accent, .6 * a); ctx.fillText(`${C.name.toUpperCase()} · ${k + 1}/${PATH.n} · HOVER · CLICK TO SPIN`, b.x0, b.y1 + 16); }
+    ctx.fillStyle = rgba(C.accent, .6 * a); if (!MOBILE) ctx.fillText(`${C.name.toUpperCase()} · ${k + 1}/${PATH.n} · HOVER · CLICK TO SPIN`, b.x0, b.y1 + 16); }
 
   const still = Math.max(0, ...Object.values(SW)); PATH.rings.forEach((z, r) => { const d = CAM.p[2] - z; if (d < 1 || d > 22 || !W.ringAsm[r] || still > .4) return; const q = project([RING.ro + .3, RING.y + .3, z]); if (!q.ok) return; const a = smooth(22, 10, d) * smooth(1, 4, d);
     lab(`PORTAL ${String(r + 1).padStart(2, '0')} · ASSEMBLY ${(W.ringAsm[r] * 100).toFixed(0)}%`, Math.min(q.x + 8, innerWidth - 220), q.y, .55 * a, ACCs); });
@@ -2180,17 +2306,17 @@ function drawHUD(SW, cmDiss) {
    ===================================================================== */
 function wireTags() {
   const S = [[1000, '', '+', 'Active members'], [30, '', '+', 'Events every year'], [1, '#', '', 'Largest ML hackathon']];
-  W.statPicks.forEach((b, i) => { tag(`<span class="n">0${i + 1} /</span> <span data-scramble>${S[i][3]}</span><span class="big" data-count="${S[i][0]}" data-pre="${S[i][1]}" data-suf="${S[i][2]}">${S[i][1]}${S[i][0]}${S[i][2]}</span>`, '', 'stats',
-    () => [b.x + (i === 1 ? -1.4 : .9), b.h + 1.05 + i * .15, b.z], { from: () => [b.x, b.h + .05, b.z], off: () => [0, -10], lineY: 8 }); });
+  W.statPicks.forEach((b, i) => { tag(`<span class="n">0${i + 1} /</span> <span data-scramble>${S[i][3]}</span><span class="big" data-count="${S[i][0]}" data-pre="${S[i][1]}" data-suf="${S[i][2]}">${S[i][1]}${S[i][0]}${S[i][2]}</span>`, 'stat', 'stats',
+    () => [b.x + (i === 1 ? -1.4 : .9), b.h + 1.05 + i * .15, b.z], { from: () => [b.x, b.h + .05, b.z], off: () => [0, -10], lineY: 8, dock: () => [22 + i * (innerWidth - 44) / 3, 78] }); });
   const META = { datathon: '3 days · 4 challenges · 175 students · CHF 12k+ prizes', hack4good: '8 weeks · pro-bono · NGO partners', quant: 'Workshops · projects · recruiting' };
   const LINE = { datathon: 'A three-day sprint on AI in industry, academia and society — the club’s flagship hackathon.', hack4good: 'Student teams apply data science to real problems for NGOs, pro bono, over eight weeks. Based at ETH Zürich, working with partners worldwide.', quant: 'Workshops with quant firms to test coding and trading skills, plus projects and exclusive recruiting.' };
-  const HOW = { datathon: '↳ Stir the loop · hover a marker to read it', hack4good: '↳ Grab the globe and spin it', quant: '↳ Hover a candle to read it' };
+  const HOW = TOUCH ? { datathon: '↳ Swipe across the loop · tap a marker to read it', hack4good: '↳ Drag the globe sideways to spin it', quant: '↳ Tap a candle to read it' } : { datathon: '↳ Stir the loop · hover a marker to read it', hack4good: '↳ Grab the globe and spin it', quant: '↳ Hover a candle to read it' };
   EX.forEach((e, i) => { const t = tag(`<span class="n">Exhibit ${e.no} /</span> <span data-scramble>Programs</span><h3>${e.name}</h3><div class="meta">${META[e.id]}</div><p>${LINE[e.id]}</p><div class="how">${HOW[e.id]}</div><button class="btn">Open dossier</button>`, 'ex', 'ex' + i,
       () => [e.pos[0] + e.side * 2.35, 3.5, e.pos[2] + .6], { dock: true, from: () => [e.pos[0] + e.side * 1.3, 3.75, e.pos[2] + 1.3], off: () => e.side > 0 ? [8, -16] : [-298, -16], lineY: 12 });
     t.el.querySelector('button').addEventListener('click', () => openDossier(e.id)); });
   const hotW = i => v3.add(W.knot.c, rotY(W.knotHot[i], W.knot.rot));
   DFACTS.forEach((f, i) => { const t = tag(`<span class="n">0${i + 1}</span>`, 'fact', 'ex0', () => hotW(i), { off: () => [10, -14], hideMobile: true, alpha: () => i === W.factOn ? 1 : .5 }); t.fi = i; });
-  { const e = EX[0]; const box = tag('', 'factbox', 'ex0', () => [e.pos[0] - 1.45, 3.2, e.pos[2] + 1.3], { off: () => [-(box.el.offsetWidth || 220) - 10, -10], from: () => hotW(W.factOn), lc: 'rgba(255,212,154,', lineY: 14, dock: () => [22, innerHeight * .2] });
+  { const e = EX[0]; const box = tag('', 'factbox', 'ex0', () => [e.pos[0] - 1.45, 3.2, e.pos[2] + 1.3], { off: () => [-(box.el.offsetWidth || 220) - 10, -10], from: () => hotW(W.factOn), lc: 'rgba(255,212,154,', lineY: 14, dock: () => [22, 76] });
     box.fbox = true; W.factBox = box; }
   tag('ETH Zürich', 'small hot', 'ex1', () => xf(W.globeM, v3.mul(W.zrh, 1.03)), { off: () => [10, -6], alpha: () => { const wp = xf(W.globeM, W.zrh); const n = v3.norm(v3.sub(wp, [EX[1].pos[0], 2.2, EX[1].pos[2]])); return clamp(v3.dot(n, v3.norm(v3.sub(CAM.p, wp))) * 3, 0, 1); } });
   ['Helvetas', 'IMPACT', 'BASE', 'iDMC', 'OECD', 'WWF'].forEach((name, i) => { const a0 = i / 6 * Math.PI * 2; tag(name, 'small', 'ex1', () => { const a = a0 + T * .18; return [EX[1].pos[0] + Math.cos(a) * 1.45, 2.2 + Math.sin(a * 2) * .12 - .1, EX[1].pos[2] + Math.sin(a) * 1.45]; },
@@ -2198,14 +2324,18 @@ function wireTags() {
   // board role labels
   W.boardRigs.forEach((R, i) => { const b = BOARD[i]; const front = b.row === 0; const t = tag(`<span class="nm0">${esc((b.name || 'Demo Member').split(' ')[0])}</span><span class="nm">${esc(b.name || 'Demo Member')}</span><b>${esc(b.role)}</b>`, 'role', 'board', () => front ? v3.add(R.cw || R.c, [0, -R.s - .08, 0]) : v3.add(R.cw || R.c, [0, R.s + .08, 0]),
     { off: q => [-(t.el.offsetWidth || 60) / 2, front ? (BOARD.filter(o => o.row === 0).indexOf(b) % 2) * 22 : -(t.el.offsetHeight || 24) - 4 - (BOARD.filter(o => o.row === 1).indexOf(b) % 2) * 30], hideMobile: true, alpha: () => .55 + R.hov * .45 }); t.R = R; });
+  if (TOUCH) $('#p-hero .hint span').textContent = 'Swipe up to begin the run';
+  { const ro = $('#roster'); ro.innerHTML = BOARD.map((b, i) => `<li><button data-i="${i}"><b>${esc(b.name)}</b><span>${esc(b.role)}</span></button></li>`).join('');
+    ro.querySelectorAll('button').forEach(bt => bt.addEventListener('click', () => { const i = +bt.dataset.i, R = W.boardRigs[i]; W.boardPick = W.boardPick === i ? -1 : i;
+      ro.querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.i === W.boardPick)); if (R && R.wave <= 0) { R.wave = SPIN; blip(600, .1); } })); }
   // hub buttons around the portal
   COMMITTEES.forEach((c, i) => { const a = i * Math.PI / 3; const t = tag(`<button><i style="background:${hex(c.accent)};box-shadow:0 0 10px ${hex(c.accent)}"></i>0${i + 1} ${c.name}<em>${c.hiring ? '· hiring' : ''}</em><span class="go">Enter →</span></button>`, 'hb', 'hub',
-      () => [Math.cos(a) * HUB.btnR, HUB.y + Math.sin(a) * HUB.btnR, ZHUB], { dock: () => [innerWidth / 2, innerHeight * .6 + i * 44] });
+      () => [Math.cos(a) * HUB.btnR, HUB.y + Math.sin(a) * HUB.btnR, ZHUB], { dock: () => { const cw = (innerWidth - 54) / 2; return [22 + (i % 2) * (cw + 10) + cw / 2, innerHeight - 22 - (2 - (i / 2 | 0)) * 56 - 24]; } });
     t.el.style.color = hex(c.accent); const btn = t.el.querySelector('button'); btn.style.color = 'var(--fg)';
     btn.addEventListener('click', () => chooseCommittee(i)); btn.addEventListener('pointerenter', () => { W.hubHover = i; }); btn.addEventListener('pointerleave', () => { if (W.hubHover === i) W.hubHover = -1; });
     hubBtns.push(t); });
   // apply badge inside the hiring portal
-  W.applyTag = tag('', 'ap', 'hiring', () => [0, 2.45, PATH.zH - .4], { off: () => [-110, -110], dock: () => [innerWidth / 2 - 110, innerHeight * .6] });
+  W.applyTag = tag('', 'ap', 'hiring', () => [0, 2.45, PATH.zH - .4], { off: () => [-110, -110], dock: () => [innerWidth - 132 - 18, innerHeight - 132 - 18] });
   // committee member cards
   for (let k = 0; k < 6; k++) { const el = document.createElement('div'); el.className = 'card'; UI.appendChild(el);
     const cd = { el, cmk: k, stop: 'cm' + k, dock: true, on: false, anchor: () => [1.15, 2.35, zMember(k)], off: () => [Math.min(40, innerWidth * .03), -30] };
